@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webbs", "Webbs.csproj", "{4D98C45E-C6B9-4908-A6C2-44BF8381FCCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "..\Contracts\Contracts.csproj", "{EC084D06-2231-4932-833C-9F26F3644DC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "..\LoggerService\LoggerService.csproj", "{1C230FB3-B4E3-4534-BB30-16144F84A8DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D98C45E-C6B9-4908-A6C2-44BF8381FCCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D98C45E-C6B9-4908-A6C2-44BF8381FCCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D98C45E-C6B9-4908-A6C2-44BF8381FCCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D98C45E-C6B9-4908-A6C2-44BF8381FCCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC084D06-2231-4932-833C-9F26F3644DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC084D06-2231-4932-833C-9F26F3644DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC084D06-2231-4932-833C-9F26F3644DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC084D06-2231-4932-833C-9F26F3644DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C230FB3-B4E3-4534-BB30-16144F84A8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C230FB3-B4E3-4534-BB30-16144F84A8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C230FB3-B4E3-4534-BB30-16144F84A8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C230FB3-B4E3-4534-BB30-16144F84A8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
