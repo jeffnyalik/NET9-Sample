@@ -1,5 +1,7 @@
 ﻿using Contracts;
+using Entities;
 using LoggerService;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
 namespace Webbs.Extensions
@@ -34,6 +36,13 @@ namespace Webbs.Extensions
         public static void configureLoggerServices(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        //Configure sql server
+        public static void configureSqlServer(this IServiceCollection services, IConfiguration config)
+        {
+           var connectionString = config["ConnectionStrings:DefaultConnection"];
+            services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
         }
     }
 }
