@@ -42,7 +42,7 @@ namespace Webbs.Extensions
         public static void configureSqlServer(this IServiceCollection services, IConfiguration config)
         {
            var connectionString = config["ConnectionStrings:DefaultConnection"];
-            services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
+            services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("Webbs")));
         }
     }
 }
