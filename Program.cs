@@ -11,6 +11,7 @@ builder.Services.configureIIsConfiguration();
 builder.Services.configureLoggerServices();
 builder.Services.configureSqlServer(builder.Configuration);
 builder.Services.AddControllers();
+builder.Services.configureJsonSerializerOptions();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));

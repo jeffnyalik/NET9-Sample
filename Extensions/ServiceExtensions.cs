@@ -44,5 +44,14 @@ namespace Webbs.Extensions
            var connectionString = config["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("Webbs")));
         }
+
+        public static void configureJsonSerializerOptions(this IServiceCollection services)
+        {
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                });
+        }
     }
 }
