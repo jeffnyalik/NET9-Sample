@@ -43,6 +43,7 @@ namespace Webbs.Controllers
         {
             await _context.AddAsync(stock);
             var result = await _context.SaveChangesAsync();
+
             return Ok(result);
         }
     }
