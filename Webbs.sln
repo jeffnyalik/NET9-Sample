@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "..\LoggerS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "..\Entities\Entities.csproj", "{ADBB0E63-5F34-4651-B107-B96D78641E44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer", "..\AuthServer\AuthServer.csproj", "{2C562376-2285-4017-8DFA-A455F24BEEF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{ADBB0E63-5F34-4651-B107-B96D78641E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADBB0E63-5F34-4651-B107-B96D78641E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADBB0E63-5F34-4651-B107-B96D78641E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C562376-2285-4017-8DFA-A455F24BEEF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C562376-2285-4017-8DFA-A455F24BEEF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C562376-2285-4017-8DFA-A455F24BEEF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C562376-2285-4017-8DFA-A455F24BEEF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

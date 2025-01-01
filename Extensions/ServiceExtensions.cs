@@ -1,5 +1,7 @@
 ﻿using Contracts;
 using Entities;
+using Entities.Interfaces;
+using Entities.Repositories;
 using LoggerService;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
@@ -52,6 +54,16 @@ namespace Webbs.Extensions
                 {
                     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
                 });
+        }
+
+        public static void configureStockRepository(this IServiceCollection services)
+        {
+            services.AddScoped<IStockRepository, StockRepository>();
+        }
+
+        public static void configureCommentRepository(this IServiceCollection services)
+        {
+            services.AddScoped<ICommentRepository, CommentRepository>();
         }
     }
 }

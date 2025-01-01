@@ -14,6 +14,9 @@ builder.Services.AddControllers();
 builder.Services.configureJsonSerializerOptions();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.configureStockRepository();
+builder.Services.configureCommentRepository();
+builder.Services.configureJwt(builder.Configuration);
 LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 var app = builder.Build();
@@ -25,12 +28,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/openapi/v1.json", "Weather App");
+
     });
 
 }
+//app.MapOpenApi();
+//app.UseSwaggerUI(options =>
+//{
+//    options.SwaggerEndpoint("/openapi/v1.json", "Weather App");
+//});
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
