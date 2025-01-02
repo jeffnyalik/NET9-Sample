@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AuthServer.Data;
+using Contracts;
 using Entities;
 using Entities.Interfaces;
 using Entities.Repositories;
@@ -45,6 +46,12 @@ namespace Webbs.Extensions
         {
            var connectionString = config["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("Webbs")));
+        }
+
+        public static void configureIdentitySqlServer(this IServiceCollection services, IConfiguration config)
+        {
+            var connectionString = config["ConnectionStrings:IdentityConnection"];
+            services.AddDbContext<IdentityContext>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("Webbs")));
         }
 
         public static void configureJsonSerializerOptions(this IServiceCollection services)

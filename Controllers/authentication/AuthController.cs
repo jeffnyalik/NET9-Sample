@@ -3,7 +3,9 @@ using Entities.Dto.auth;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -17,31 +19,43 @@ namespace Webbs.Controllers.authentication
     {
         private readonly ILogger<AuthController> _logger;
         private readonly IConfiguration _configuration;
-        public AuthController(ILogger<AuthController> logger, IConfiguration configuration)
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public AuthController(
+            ILogger<AuthController> logger,
+            IConfiguration configuration,
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _configuration = configuration;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult>Login([FromBody] AuthDto login)
+        public async Task<IActionResult> Login([FromBody] AuthDto login)
         {
             if (ModelState.IsValid)
             {
-                //search for a predifined user in our store with username and password
-                var user = UserStore.Users.FirstOrDefault(
-                    u => u.Username == login.Username && u.Password == login.Password
-                    );
-                if(user == null)
+                var user = await _userManager.FindByEmailAsync(login.Email);
+                if (user == null)
                 {
-                    return Unauthorized("Invalid user credentials");
+                    _logger.LogError($"User {login.Email} not found");
+                    return NotFound(new { message = "User not found" });
                 }
-                
-                var token = GenerateJwtToken(user);
-                return Ok(new { access_token = token });
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, login.Password, false, false);
+                if (result.Succeeded)
+                {
+                    var token = GenerateJwtToken(user);
+                    _logger.LogInformation($"User {user.UserName} logged in successfully");
+                    return Ok(new { token });
+                }
+
+                _logger.LogError($"User {user.UserName} Invalid credentials");
+                return BadRequest(new { message = "Invalid credentials" });
             }
-            
-            return BadRequest("Invalid payload");
+            return BadRequest(ModelState);
         }
 
         [HttpGet("users")]
@@ -53,8 +67,7 @@ namespace Webbs.Controllers.authentication
             return Ok(new { message = users });
         }
 
-
-        private string GenerateJwtToken(User user)
+        private string GenerateJwtToken(ApplicationUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
@@ -63,7 +76,7 @@ namespace Webbs.Controllers.authentication
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                            new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

@@ -10,6 +10,7 @@ builder.Services.configureCors();
 builder.Services.configureIIsConfiguration();
 builder.Services.configureLoggerServices();
 builder.Services.configureSqlServer(builder.Configuration);
+builder.Services.configureIdentitySqlServer(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.configureJsonSerializerOptions();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -17,6 +18,7 @@ builder.Services.AddOpenApi();
 builder.Services.configureStockRepository();
 builder.Services.configureCommentRepository();
 builder.Services.configureJwt(builder.Configuration);
+builder.Services.configureIdentity(builder.Configuration);
 LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 var app = builder.Build();
